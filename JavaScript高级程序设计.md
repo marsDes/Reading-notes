@@ -12,7 +12,9 @@
   `
 ## 3.4 数据类型
     * 基本数据类型：undefined、null、Boolean、number和string
+    
     * 复杂数据类型：object
+    
     tips:如果定义的变量准备在将来用于保存对象，最好将改变量初始化为null
   `let person = null;
   if(person != null){
@@ -25,10 +27,11 @@
 ## 3.5 操作符
 ### 3.5.1 一元操作符
    * 递增(++)和递减(--)操作符
+   
     `
     let age = 29;
         ++age;
     let age = 29;
         age = age + 1;
     `
-         tips:前置执行操作符
+    tips:前置执行操作符
