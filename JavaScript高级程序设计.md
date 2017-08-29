@@ -10,6 +10,6 @@
        age     = 30'
   `
 ##3.4 数据类型
-    *基本数据类型：undefined、null、Boolean、number和string
-    *复杂数据类型：object
+    基本数据类型：undefined、null、Boolean、number和string
+    复杂数据类型：object
 ###3.4.1 typeof 操作符
