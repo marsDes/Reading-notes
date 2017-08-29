@@ -11,10 +11,8 @@
        age     = 30'
   `
 ## 3.4 数据类型
-    * 基本数据类型：undefined、null、Boolean、number和string
-    
-    * 复杂数据类型：object
-    
+*   基本数据类型：undefined、null、Boolean、number和string
+*   复杂数据类型：object
     tips:如果定义的变量准备在将来用于保存对象，最好将改变量初始化为null
   `let person = null;
   if(person != null){
@@ -34,4 +32,4 @@
     let age = 29;
         age = age + 1;
     `
-    tips:前置执行操作符
+tips:前置执行操作符
