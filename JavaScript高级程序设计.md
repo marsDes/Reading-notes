@@ -14,6 +14,7 @@
 *   基本数据类型：undefined、null、Boolean、number和string
 *   复杂数据类型：object
     tips:如果定义的变量准备在将来用于保存对象，最好将改变量初始化为null
+    
   `
   let person = null;
   if(person != null){
