@@ -28,10 +28,10 @@
 ### 3.5.1 一元操作符
    * 递增(++)和递减(--)操作符
    
-    `
-    let age = 29;
-        ++age;
-    let age = 29;
-        age = age + 1;
-    `
+`
+let age = 29;
+    ++age;
+let age = 29;
+    age = age + 1;
+`
 tips:前置执行操作符
