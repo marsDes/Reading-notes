@@ -32,6 +32,10 @@
 let age = 29;
     ++age;
 let age = 29;
-    age = age + 1;
+    age = age + 1;
+let age = 29;
+let otherAge = --age + 2;
+console.log(age)   //28
+console.log(otherAge) //30
 </pre>
 tips:前置执行操作符
