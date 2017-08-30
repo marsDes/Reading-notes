@@ -39,3 +39,43 @@ console.log(age)   //28
 console.log(otherAge) //30
 </pre>
 tips:前置执行操作符
+
+   * 加(+)和减(-)操作符
+<pre>
+ let a = 1, b = '1.1', c = 'z', d = false;
+     a = +a;    // 1
+     b = +b;    //1.1
+     c = +c;    //NaN
+     a = -a;    // -1
+     b = -b;    // -1.1
+     c = -c;    // NaN
+     d = ±d;    //加减操作均返回 0
+</pre>
+
+### 3.5.2 位操作符
+   * 按位非        ~
+   * 按位与        &
+   * 按位或        |
+   * 按位异或      ^
+   * 左移         <<
+   * 有符号右移    >>
+   * 无符号右移    >>>
+   
+ ### 3.5.3 布尔操作符
+   * 逻辑非 !
+   <pre>
+   !false       //true
+   !'false'     //false
+   !0           //true
+   !NaN         //true
+   !''          //true
+   !123         //false
+   
+   !!'false'   //true  双逻辑非操作符实际会模拟Boolean() 转型函数的行为，第一个逻辑非无论什么操作数均返回一个布尔值
+   </pre>
+   * 逻辑与 &&
+   * 逻辑或 ||
+   tips:可利用逻辑或避免变量null 或 undefined 例如：
+   `let dataList = foodList || '' `
+    
+ ### 3.5.4 乘性操作符
