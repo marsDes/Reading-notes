@@ -94,3 +94,52 @@ if(someVale){
  //your code2
 }
 ```
+### 3.6.2  do-while语句
+ do-while 语句是一种后测试循环语句，即只有循环体中的代码执行之后，才会测试出口条件
+```
+let start = 0;
+do{
+ start += 2;
+}while(start > 10){  //只要 start 小于 10 就执行do 语句块
+ console.log(start)
+}
+```
+### 3.6.3  while语句
+ while 语句属于前测试循环语句，即在循环体内的代码被执行前，就会对出口条件求值
+```
+let start = 0;
+while(start < 10){
+ start += 2;
+ console.log(start)
+}
+```
+### 3.6.4  for语句 (略)
+### 3.6.5  for-in语句
+for-in语句是一种精准的迭代语句，可以用来美剧对象的属性
+```
+for(let key in window){
+ console.log(key)
+}
+```
+### 3.6.6  label语句(略)
+### 3.6.7  break和continue语句
+break和continue语句用于再循环中精确地控制代码的执行。其中，break语句会立即退出循环，强制执行循环后的语句，而continue语句虽然也是立即退出循环，但退出循环后会从循环顶部继续执行。
+```
+let num = 0;
+for(let i=1; i<10; i++){
+ if(i%5 == 0){
+  break;
+ }
+ num++
+}
+console.log(num)    //4
+__________
+let num = 0;
+for(let i=1; i<10; i++){
+ if(i%5 == 0){
+  continue;     // 跳出循环， num++ 不执行
+ }
+ num++
+}
+console.log(num)   //8
+```
