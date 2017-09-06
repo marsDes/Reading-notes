@@ -1,6 +1,7 @@
 # JavaScript高级程序设计 读书笔记 
 ## 1-2章略
 
+# 3 基本概念
 ## 3.1  语法
 ### 3.1.1  区分大小写
    test != Test
@@ -15,12 +16,12 @@
 *   复杂数据类型：object
     tips:如果定义的变量准备在将来用于保存对象，最好将改变量初始化为null
     
-<pre>
+```
   let person = null;
   if(person != null){
    //do someting
   }
-</pre>
+```
 ### 3.4.1 typeof 操作符
    返回值：1、undefined(未定义)；2、boolean(布尔值)；3、string(字符串)；4、number(数值)；5、object(对象或者null)；6、funtion(函数)
 
@@ -28,7 +29,7 @@
 ### 3.5.1 一元操作符
 *   递增(++)和递减(--)操作符
    
-<pre>
+```
 let age = 29;
     ++age;
 let age = 29;
@@ -37,11 +38,11 @@ let age = 29;
 let otherAge = --age + 2;
 console.log(age)   //28
 console.log(otherAge) //30
-</pre>
+```
 tips:前置执行操作符
 
 *  加(+)和减(-)操作符
-<pre>
+```
  let a = 1, b = '1.1', c = 'z', d = false;
      a = +a;    // 1
      b = +b;    //1.1
@@ -50,7 +51,7 @@ tips:前置执行操作符
      b = -b;    // -1.1
      c = -c;    // NaN
      d = ±d;    //加减操作均返回 0
-</pre>
+```
 
 ### 3.5.2 位操作符
 *   按位非        ~
@@ -63,7 +64,7 @@ tips:前置执行操作符
    
  ### 3.5.3 布尔操作符
 *   逻辑非 !
-   <pre>
+   ```
    !false       //true
    !'false'     //false
    !0           //true
@@ -71,7 +72,7 @@ tips:前置执行操作符
    !''          //true
    !123         //false
    !!'false'   //true  双逻辑非操作符实际会模拟Boolean() 转型函数的行为，第一个逻辑非无论什么操作数均返回一个布尔值
-   </pre>
+   ```
 *  逻辑与 &&
 *  逻辑或 ||
    tips:可利用逻辑或避免变量null 或 undefined 例如：
@@ -144,3 +145,144 @@ for(let i=1; i<10; i++){
 console.log(num)   //8
 ```
 ### 3.6.8  with语句（略）
+### 3.6.9  switch语句
+```
+switch(i){
+  case 10:                      // 等价 if i === 10; 全等
+    console.log('i is 10');
+    break;                      // case 语句后面加break 中断执行，如省略即继续执行下面语句 合并多种情形
+  case 20:
+    console.log('i is 20');
+    break;
+  default:                     // 不匹配前面所有case语句则执行default 后面的语句
+    console.log('other')
+}
+// case 语句也可以是变量或者是表达式
+let num = 25;
+switch(true){
+  case num < 0:                // num < 0 === true 
+    console.log('num is less than 0');
+    break;
+  case num >= 0 && num <= 20:
+    console.log('num is between 0 and 20');
+    break;
+  default:
+    console.log('num is more than 20')
+}
+```
+## 3.7  函数
+```
+function funName(arg0,arg1...){
+  //your code 
+}
+funName(a,b,c...)
+function returnSum(agr0,arg1){
+  return arg0 + agr1
+  console.log('never run')  //永远不会执行
+}
+let sum = returnSum(10,11);
+```
+推荐做法：要么让函数始终返回一个值要么永远都没返回值
+
+### 3.7.1   理解参数
+  在函数体内可以通过arguments(类数组非Array实例)对象访问参数数组，从而获取传递给函数的每一个函数，arguments[0],arguments[1]...，获取参数总数 arguments.length
+重写 returnSum 函数
+```
+function returnSum(){
+  return arguments[0] + arguments[1];
+}
+```
+由上说明:命名函数参数名只提供便利，但不是必需的。arguments行为也有一些比较有意思的
+```
+function funA(x,y){
+  arguments[1] = 10;
+  console.log(x+y)
+}
+funA(10,100)    //20
+funA(10)        // NaN  <== 10 + undefined   严格模式报错 代码(arguments[1] = 10;)不执行
+```
+arguments的长度由传入的参数个数决定，无法在函数内改变，未传递值得参数将自动赋值为undefined。同时也说明arguments非Array实例。
+```
+let arrA = [];
+    arrA[1] = 10;
+    arrA = [undefined,10];
+funA(10){
+    //x = 10;
+    arguments[1] = 10;
+    //y = undefined;
+}
+```
+### 3.7.2   没有重载
+  可以通过对arguments的判断，执行不同代码，模仿重载
+
+# 4 变量、作用域和内存问题
+## 4.1 基本类型和引用类型的值
+### 4.1.1 动态的属性
+```
+let person = new Object();
+    person.age = 30;
+console.log(person.age)                 // 30
+let name = 'mars';
+    name.age = 30;
+    console.log(name.age)               //undefined
+```
+### 4.1.2 复制变量值
+```
+let num1 = 5;
+    num2 = num1;
+    num1 = 10;
+    console.log(num2)                   // 5 num1互不影响
+let personA = new Object();
+    personB = personA;
+    personA.name = 'mars';
+    console.log(personB.name)           //mars   
+```
+personA,personB 指向同一个对象，new Object()保存在堆内存中， personA,personB通过访问同一个指针实现对其引用
+### 4.1.3 传递参数
+```
+function resFun(num){
+  return num + 10
+}
+let num = 20,
+    newNum = resFun(num);   // num = 20;  newNum =30;
+
+function setName(person){
+  person.name = 'mars'
+}
+let person = new Object();
+setName(person)             //person.name = 'mars'
+
+function setName1(person){
+  person.name = 'athean'
+  person = new Object();
+  person.name = 'mars'
+}
+let person1 = new Object();
+    setName1(person1)      //person1.name = 'athean'
+```
+### 4.1.4 检测类型
+*   typeof
+```
+let a = 'aaaa',
+    b = true,
+    c = 22,
+    d,
+    e = null,
+    f = {};
+    typeof a;     // 'string'
+    typeof b;     // 'boolean'
+    typeof c;     // 'number'
+    typeof d;     // 'undefined'
+    typeof e;     // 'object'
+    typeof f;     // 'object'
+```
+*   instanceof
+```
+let person = {'name':'mars','age':30},
+    colors = ['red','green','blue'],
+    regExp = /[a-z]/;
+    person instanceof Object;       //  变量 person 是 Object 吗 true
+    colors instanceof Array;        //  true
+    regExp instanceof RegExp;       //  true
+```
+ tips: instanceof 检测基本类型的值 始终返回 fasle 如: `a instanceof String` 
