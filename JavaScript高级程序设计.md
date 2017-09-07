@@ -228,11 +228,11 @@ let name = 'mars';
 ```
 ### 4.1.2 复制变量值
 ```
-let num1 = 5;
+let num1 = 5,
     num2 = num1;
     num1 = 10;
     console.log(num2)                   // 5 num1互不影响
-let personA = new Object();
+let personA = new Object(),
     personB = personA;
     personA.name = 'mars';
     console.log(personB.name)           //mars   
@@ -286,3 +286,23 @@ let person = {'name':'mars','age':30},
     regExp instanceof RegExp;       //  true
 ```
  tips: instanceof 检测基本类型的值 始终返回 fasle 如: `a instanceof String` 
+
+## 4.4 小结
+  基本类型值和引用类型值有以下特点
+*   基本值类型在内存中占据固定大小的空间，因此保存在栈内存中
+*   从一个变量向另一个变量赋值基本类型的值，会创建这个值得副本
+*   引用类型的值是对象，保存在堆内存中
+*   包含引用类型值得变量实际上包含的并不是对象本身，而是一个指向该对象的指针
+*   从一个变量向另一个变量赋值引用类型的值，实际复制的是指向对象的指针，因此2个变量最终指向同一个对象
+*   typefo操作符可以确定值是哪种基本类型  instanceof操作符可以判断值是哪种引用类型
+
+  作用域总结
+*   作用域有全局作用域和函数作用域之分
+*   每次进入一个新的执行环境，都会创建一个用于搜索变量和函数的作用域链
+*   函数的局部作用域不仅可以访问函数作用域中的变量，也能放访问其父环境，甚至全局全局
+*   全局环境只能访问在全局环境中定义的变量，而不能直接访问局部环境中的任何数据
+*   变量的作用域有助于确定合适释放内存空间
+
+  垃圾机制总结（略）
+
+
