@@ -330,7 +330,7 @@ let propertyeName = 'name';
     console.log(person[propertyeName])    // mars
 ```
 
-##5.2 Array 类型
+## 5.2 Array 类型
   创建Array实例的2种方式
 *   new操作符加Array构造函数
 ```
