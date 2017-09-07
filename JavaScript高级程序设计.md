@@ -305,4 +305,50 @@ let person = {'name':'mars','age':30},
 
   垃圾机制总结（略）
 
+# 5 引用类型
 
+## 5.1 Object 类型
+  创建Object实例的2种方式
+*   new操作符加Object构造函数
+```
+let person =  new Object();  //person = {};
+    person.name = 'mars';
+    person.age = 18;
+```
+*   对象字面量
+```
+let person = {
+  name:'mars',
+  age:18
+}
+```
+  对象属性访问 点标识符及方括号，通常除了必须使用变量来访问属性，否则建议点标识法
+```
+console.log(person.name)                  // mars
+console.log(person["name"])               // mars
+let propertyeName = 'name';
+    console.log(person[propertyeName])    // mars
+```
+
+##5.2 Array 类型
+  创建Array实例的2种方式
+*   new操作符加Array构造函数
+```
+let colors = new Array();           // colors = Array()  可省略 new 操作符
+let date = new Array(7);
+let foods = new Array('seafood','rice','bread');
+```
+*   数组字面量
+```
+let colors = [];
+let foods = ['seafood','rice','bread'];
+```
+数组元素访问
+```
+console.log(foods[0])      // seafood
+foods[1] = 'meat'          // 修改第二项
+foods[4] = 'vegetables'    // 新增第四项
+foods.length               // 4
+foods.length = 2           // 动态修改数组长度
+console.log(foods[2])      // undefined
+```
