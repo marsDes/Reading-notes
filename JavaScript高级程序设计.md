@@ -7,16 +7,17 @@
    test != Test
 ### 3.1.2  标识符
   指变量、函数、属性的名字或者函数的参数
-  `var message = 'hello world',
+  ```js
+  var message = 'hello world',
        name    = 'mars',
        age     = 30'
-  `
+  ```
 ## 3.4 数据类型
 *   基本数据类型：undefined、null、Boolean、number和string
 *   复杂数据类型：object
     tips:如果定义的变量准备在将来用于保存对象，最好将改变量初始化为null
     
-```
+```js
   let person = null;
   if(person != null){
    //do someting
@@ -29,7 +30,7 @@
 ### 3.5.1 一元操作符
 *   递增(++)和递减(--)操作符
    
-```
+```js
 let age = 29;
     ++age;
 let age = 29;
@@ -42,7 +43,7 @@ console.log(otherAge) //30
 tips:前置执行操作符
 
 *  加(+)和减(-)操作符
-```
+```js
  let a = 1, b = '1.1', c = 'z', d = false;
      a = +a;    // 1
      b = +b;    //1.1
@@ -64,7 +65,7 @@ tips:前置执行操作符
    
  ### 3.5.3 布尔操作符
 *   逻辑非 !
-   ```
+   ```js
    !false       //true
    !'false'     //false
    !0           //true
@@ -88,7 +89,7 @@ tips:前置执行操作符
 
 ## 3.6 语句
 ### 3.6.1  if语句
-```
+```js
 if(someVale){
  //your code1
 }else{
@@ -97,7 +98,7 @@ if(someVale){
 ```
 ### 3.6.2  do-while语句
  do-while 语句是一种后测试循环语句，即只有循环体中的代码执行之后，才会测试出口条件
-```
+```js
 let start = 0;
 do{
  start += 2;
@@ -107,7 +108,7 @@ do{
 ```
 ### 3.6.3  while语句
  while 语句属于前测试循环语句，即在循环体内的代码被执行前，就会对出口条件求值
-```
+```js
 let start = 0;
 while(start < 10){
  start += 2;
@@ -117,7 +118,7 @@ while(start < 10){
 ### 3.6.4  for语句 (略)
 ### 3.6.5  for-in语句
 for-in语句是一种精准的迭代语句，可以用来美剧对象的属性
-```
+```js
 for(let key in window){
  console.log(key)
 }
@@ -125,7 +126,7 @@ for(let key in window){
 ### 3.6.6  label语句(略)
 ### 3.6.7  break和continue语句
 break和continue语句用于再循环中精确地控制代码的执行。其中，break语句会立即退出循环，强制执行循环后的语句，而continue语句虽然也是立即退出循环，但退出循环后会从循环顶部继续执行。
-```
+```js
 let num = 0;
 for(let i=1; i<10; i++){
  if(i%5 == 0){
@@ -146,7 +147,7 @@ console.log(num)   //8
 ```
 ### 3.6.8  with语句（略）
 ### 3.6.9  switch语句
-```
+```js
 switch(i){
   case 10:                      // 等价 if i === 10; 全等
     console.log('i is 10');
@@ -171,7 +172,7 @@ switch(true){
 }
 ```
 ## 3.7  函数
-```
+```js
 function funName(arg0,arg1...){
   //your code 
 }
@@ -187,13 +188,13 @@ let sum = returnSum(10,11);
 ### 3.7.1   理解参数
   在函数体内可以通过arguments(类数组非Array实例)对象访问参数数组，从而获取传递给函数的每一个函数，arguments[0],arguments[1]...，获取参数总数 arguments.length
 重写 returnSum 函数
-```
+```js
 function returnSum(){
   return arguments[0] + arguments[1];
 }
 ```
 由上说明:命名函数参数名只提供便利，但不是必需的。arguments行为也有一些比较有意思的
-```
+```js
 function funA(x,y){
   arguments[1] = 10;
   console.log(x+y)
@@ -202,7 +203,7 @@ funA(10,100)    //20
 funA(10)        // NaN  <== 10 + undefined   严格模式报错 代码(arguments[1] = 10;)不执行
 ```
 arguments的长度由传入的参数个数决定，无法在函数内改变，未传递值得参数将自动赋值为undefined。同时也说明arguments非Array实例。
-```
+```js
 let arrA = [];
     arrA[1] = 10;
     arrA = [undefined,10];
@@ -218,7 +219,7 @@ funA(10){
 # 4 变量、作用域和内存问题
 ## 4.1 基本类型和引用类型的值
 ### 4.1.1 动态的属性
-```
+```js
 let person = new Object();
     person.age = 30;
 console.log(person.age)                 // 30
@@ -227,7 +228,7 @@ let name = 'mars';
     console.log(name.age)               //undefined
 ```
 ### 4.1.2 复制变量值
-```
+```js
 let num1 = 5,
     num2 = num1;
     num1 = 10;
@@ -239,7 +240,7 @@ let personA = new Object(),
 ```
 personA,personB 指向同一个对象，new Object()保存在堆内存中， personA,personB通过访问同一个指针实现对其引用
 ### 4.1.3 传递参数
-```
+```js
 function resFun(num){
   return num + 10
 }
@@ -262,7 +263,7 @@ let person1 = new Object();
 ```
 ### 4.1.4 检测类型
 *   typeof
-```
+```js
 let a = 'aaaa',
     b = true,
     c = 22,
@@ -277,7 +278,7 @@ let a = 'aaaa',
     typeof f;     // 'object'
 ```
 *   instanceof
-```
+```js
 let person = {'name':'mars','age':30},
     colors = ['red','green','blue'],
     regExp = /[a-z]/;
@@ -310,20 +311,20 @@ let person = {'name':'mars','age':30},
 ## 5.1 Object 类型
   创建Object实例的2种方式
 *   new操作符加Object构造函数
-```
+```js
 let person =  new Object();  //person = {};
     person.name = 'mars';
     person.age = 18;
 ```
 *   对象字面量
-```
+```js
 let person = {
   name:'mars',
   age:18
 }
 ```
   对象属性访问 点标识符及方括号，通常除了必须使用变量来访问属性，否则建议点标识法
-```
+```js
 console.log(person.name)                  // mars
 console.log(person["name"])               // mars
 let propertyeName = 'name';
@@ -333,18 +334,18 @@ let propertyeName = 'name';
 ## 5.2 Array 类型
   创建Array实例的2种方式
 *   new操作符加Array构造函数
-```
+```js
 let colors = new Array();           // colors = Array()  可省略 new 操作符
 let date = new Array(7);
 let foods = new Array('seafood','rice','bread');
 ```
 *   数组字面量
-```
+```js
 let colors = [];
 let foods = ['seafood','rice','bread'];
 ```
-数组元素访问
-```
+*   数组元素访问
+```js
 console.log(foods[0])      // seafood
 foods[1] = 'meat'          // 修改第二项
 foods[4] = 'vegetables'    // 新增第四项
