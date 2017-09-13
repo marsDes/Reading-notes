@@ -1,5 +1,5 @@
 # JavaScript高级程序设计 读书笔记 
-## 1-2章略
+## 1-2章 （略）
 
 # 3 基本概念
 ## 3.1  语法
@@ -353,3 +353,54 @@ foods.length               // 4
 foods.length = 2           // 动态修改数组长度
 console.log(foods[2])      // undefined
 ```
+
+# 5.2.1 检测数组
+```js
+  let arr = [1,2,3,4,5];
+  arr instanceof Array  // true
+  Array.isArray(arr)    // true es6
+```
+# 5.2.2 相关方法
+[数组相关方法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+```js
+  let arr = [1,2,3,4,5,6];
+  arr.push(7);                      //  返回数组长度  7
+  arr.sort((a,b)=> a>b ? -1 : 1);   //[7, 6, 5, 4, 3, 2, 1]
+  arr.splice(1,2)                   //返回被删除项 [6,5] 参数说明 起始下标 1，删除长度 2.
+  console.log(arr)                  //[7, 4, 3, 2, 1]
+  arr.splice(1,0,"6","5")           //返回被删除项 [],参数说明 起始下标1；删除长度 0 返回[]; 插入的项 "6","5";
+  console.log(arr)                  //[7, "6", "5", 4, 3, 2, 1]
+  arr.splice(1,2,6,5)               //返回被删除项 ["6","5"],参数说明 起始下标1；删除长度 2 ; 插入的项 6,5;
+  console.log(arr)                  //[7, "6", "5", 4, 3, 2, 1]
+```
+# 5.2.8 迭代&&缩小方法
+*   every()  : 对数组每一项运行给定函数,如该数组每一项都返回 true 则返回 true 类似 &&
+*   some()   : 对数组每一项运行给定函数,如该数组中有一项返回 true 则返回 true 类似 ||
+*   filter() : 对数组每一项运行给定函数,返回该函数返回 true 的项组成的数组 筛选
+*   forEach(): 对数组每一项运行给定函数,无返回值  遍历
+*   map()    : 对数组每一项运行给定函数,返回每次函数运行结果组成的数组
+    以上迭代方法调用给定函数的入参 item,idx,arr 
+*   reduce()      : 从数组第一项开始逐项遍历到最后一项。
+*   reduceRight() : 从数组最后一项开始向前遍历到第一项。
+    以上缩小方法2个入参: 1、每一项调用的函数; 2、可选。作为缩小基础的初始值
+    传给调用函数的入参 pre cur idx arr,前一个值 当前值 项的索引 数组对象
+```js
+  let arr = [1,2,3,4,5,6],brr = [];
+  let everyResult = arr.every((item,idx,arr) => item > 3)           // false
+  let someResult = arr.some((item,idx,arr) => item > 3)             // true
+  let filterResult = arr.filter((item,idx,arr) => item > 3)         //[4,5,6]
+  let mapResult = arr.map((item,idx,arr) => item * 3)               //[3,6,9,12,15,18]
+  arr.forEach(function(item,idx){
+    brr.push(item * 2)
+  });
+  console.log(brr)                                                  //[2,4,6,8,10,12]
+  let reduceResult = arr.reduce((pre,cur,idx,arr) => pre + cur)            // 21
+      reduceResult = arr.reduce((pre,cur,idx,arr) => pre + cur, 9)         // 30
+      reduceResult = arr.reduce((pre,cur,idx,arr) => pre + cur,'a')        // "a123456"
+  let redRigResult = arr.reduceRight((pre,cur,idx,arr) => pre + cur, 9)    // 30
+      redRigResult = arr.reduceRight((pre,cur,idx,arr) => pre + cur,'a')   // "a654321"
+
+```
+
+
+
