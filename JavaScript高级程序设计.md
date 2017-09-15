@@ -6,12 +6,12 @@
 ### 3.1.1  区分大小写
    test != Test
 ### 3.1.2  标识符
-  指变量、函数、属性的名字或者函数的参数
-  ```js
+指变量、函数、属性的名字或者函数的参数
+```js
   var message = 'hello world',
        name    = 'mars',
        age     = 30'
-  ```
+```
 ## 3.4 数据类型
 *   基本数据类型：undefined、null、Boolean、number和string
 *   复杂数据类型：object
@@ -65,7 +65,7 @@ tips:前置执行操作符
    
  ### 3.5.3 布尔操作符
 *   逻辑非 !
-   ```js
+```js
    !false       //true
    !'false'     //false
    !0           //true
@@ -73,7 +73,7 @@ tips:前置执行操作符
    !''          //true
    !123         //false
    !!'false'   //true  双逻辑非操作符实际会模拟Boolean() 转型函数的行为，第一个逻辑非无论什么操作数均返回一个布尔值
-   ```
+```
 *  逻辑与 &&
 *  逻辑或 ||
    tips:可利用逻辑或避免变量null 或 undefined 例如：
@@ -400,8 +400,64 @@ console.log(foods[2])      // undefined
       reduceResult = arr.reduce((pre,cur,idx,arr) => pre + cur,'a')        // "a123456"
   let redRigResult = arr.reduceRight((pre,cur,idx,arr) => pre + cur, 9)    // 30
       redRigResult = arr.reduceRight((pre,cur,idx,arr) => pre + cur,'a')   // "a654321"
-
 ```
 
-
-
+# 5.3 Date 类型 （略）
+# 5.4 RegExp 类型 （略）
+# 5.5 Function 类型
+函数有如下定义方式：1、函数声明；2、函数表达式；3、Function 构造函数（不推荐）
+```js
+  function funName(a,b){
+    return a + b
+  }
+  var sum = function(a,b){
+    return a + b
+  }
+  var sum = new Function("a","b","return a+b")
+```
+## 5.5.1 没有重载
+将函数名想象为指针
+```js
+  function funName(a,b){
+    return a + b
+  }
+  function funName(a,b){
+    return a - b
+  }
+  var res = funName(5,3);     // 2
+  var a = 5;
+      a = 6;
+  console.log(a)              // 6 创建第二个函数的时候 实际覆盖了引用第一个函数变量 funName
+```
+## 5.5.2 函数声明与函数表达式  区别
+是否提升
+```js
+  console.log(funName(5,5))   // 10
+  function funName(a,b){
+    return a + b
+  }
+  console.log(sum(5,5))       // 报错
+  var sum = function(a,b){
+    return a + b
+  }
+  var sum = new Function("a","b","return a+b")
+```
+## 5.5.3 做为参数的函数    (略)
+## 5.5.4 函数内部属性
+*   arguments   是类数组对象，用于保存函数参数，该对象有一个callee的属性，该属性是一个指针，指向拥有这个arguments对象的函数
+*   this        函数的名字仅仅是一个包含指针的变量；同一个函数，被不同对象调用，该函数的指向仍然是同一个函数
+*   caller(es6) 该属性保存着调用当前函数的函数的引用，如果在全局作用于调用该属性，它的值为null
+```js
+  function outer(){
+    console.log(outer.caller)          // null 
+    console.log(this.caller)           // undefined
+    console.log(this == window)        // true
+    inner()
+  }
+  function inner(){
+    console.log(inner.caller == outer) // true
+    console.log(this.caller)           // undefined
+    console.log(this == window)        // true
+  }
+  outer()                             // 
+``` 
