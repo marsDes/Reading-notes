@@ -465,5 +465,5 @@ console.log(foods[2])      // undefined
 ## 5.5.5 函数属性和方法
 属性
 *   length 表示函数希望接收的命名参数的个数 `funName.length // 2`
-*   prototype 第六章详细介绍
+*   prototype 第六章详细介绍 <br>
 call(),apply(),bind()的作用及用法
