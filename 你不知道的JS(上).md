@@ -99,5 +99,39 @@ this，提供一种优雅的方式来隐式‘传递’一个对象的引用，�
 ```
 
 #### 2.2.2.3 显式绑定
-利用call()，apply()方法强制绑定this,2者唯一区别主要体现在参数上<br>
+利用call()，apply()方法强制绑定this,两者唯一区别主要体现在参数上<br>
 如 [#### 2.1.2.1 所示](#2121-指向自身)
+丢失绑定的解决方式
+*   硬绑定 ES5内置方法 Funtion.prototype.bind,用法如下
+```js
+  function funName(arg){
+    console.log(this.a,arg)
+    return this.a + arg;
+  }
+  var obj = {a:2};
+  var funBind = funName(20).bind(obj)   // 2,20
+      console.log(funBind)              // 22
+```
+*   API调用的“上下文” context
+```js
+  function foo(el){
+    console.log(el,this.id)
+  }
+  var obj = {id:"key"}
+  [1,2,3].forEach(foo,obj)         //array.forEach(callback, this)
+```
+
+#### 2.2.2.4 new绑定
+使用 new 来调用函数会执行如下操作
+*   创建或者说构造一个全新的对象
+*   这个新的对象会被执行[[Prototype]]连接
+*   这个新的对象会绑定到函数调用的this
+*   如果函数没有返回其他对象，那么new表达式在的函数调用会自动返回这个新的对象
+```js
+  function foo(a){
+    this.a = a
+  }
+  var bar = new foo(1)
+  console.log(bar)            // foo {a:1} 自动返回该新对象
+  console.log(bar.a)          // 1
+```

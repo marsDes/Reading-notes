@@ -467,3 +467,27 @@ console.log(foods[2])      // undefined
 *   length 表示函数希望接收的命名参数的个数 `funName.length // 2`
 *   prototype 第六章详细介绍 <br>
 call(),apply(),bind()的作用及用法
+
+## 5.6 基本包装类型   (略)
+介绍 Boolean类型、Number类型、String类型相关方法 如，substr,replace...
+## 5.7 单体内置对象
+### 5.7.1 全局对象Gobal
+*   window对象 web环境中的全局对象
+
+### 5.7.2 Math对象
+*   min()和max()方法，可以接收任意数量的参数 `Math.min(1,2,-3,5,0,4)  // -3`
+*   舍入方法 ceil(),floor(),round()
+```js
+  var num = 2.34634
+  Math.ceil(num)         // 3 向上取整
+  Math.floor(num)        // 2 向下取整
+  Math.round(num)        // 2 四舍五入
+```
+*   随机函数random(),返回0-1之间的随机数
+```js
+  Math.random()
+  Math.floor(Math.random()*10 + 1)   // 1-10
+  Math.floor(Math.random()*9 + 2)    // 2-10  2到10 有9个数
+```
+
+## 5.8 小结   (略)
