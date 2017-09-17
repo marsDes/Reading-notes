@@ -491,3 +491,41 @@ call(),apply(),bind()的作用及用法
 ```
 
 ## 5.8 小结   (略)
+
+# 6 面向对象的程序设计
+面向对象编程（OOP）都有累的概念，而js没有，是通过闭包的封装来模拟类的实现。
+
+## 6.1 理解对象
+创建方式 new 构造函数及对象字面量
+
+### 6.1.1 属性类型
+*   _数据属性_ 包含一个数据值的位置，其有四个描述其行为的特性。
+  1. [[Configurable]]:表示能否通过delete删除属性从而重新定义属性  默认值为 true
+  2. [[Enumerable]]:表示能否通过for-in循环返回属性              默认值为 true
+  3. [[Writable]]:表示能否修改属性的值                        默认值为 true
+  4. [[Vaule]]:包含这个属性的数据值                            默认值为 undefined  `var o={}; o.o//undefined`
+```js
+//修改属性默认特性 方法  Object.defineProperty(obj,key,descriportObj)
+//descriportObj 的属性名必须是 configurable|enmuberable|writeable|value
+  var obj = {
+    name:"Mars",
+    age:30
+  }
+  Object.defineProperty(obj,"name",{
+    value:"Kobe",
+    configurable:false,
+    writable:false
+    });
+  console.log(obj)         // {name:"Kobe",age:30}
+  obj.name = "Apple";
+  delete obj.name
+  delete obj.age
+  console.log(obj)         // {name:"Kobe"}
+```
+*   _访问器属性_ 不包含数据值，他们包含一对getter和setterh函数，其有如下四个特性
+  1. [[Configurable]]:表示能否通过delete删除属性从而重新定义属性  默认值为 true
+  2. [[Enumerable]]:表示能否通过for-in循环返回属性              默认值为 true
+  3. [[Get]]:读取属性时调用的函数                              默认值为 undefined
+  4. [[Set]]:写入属性时调用的函数                              默认值为 undefined
+
+### 6.1.2 定义多个属性
