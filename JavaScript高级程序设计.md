@@ -501,9 +501,9 @@ call(),apply(),bind()的作用及用法
 ### 6.1.1 属性类型
 *   _数据属性_ 包含一个数据值的位置，其有四个描述其行为的特性。
   1. [[Configurable]]:表示能否通过delete删除属性从而重新定义属性  默认值为 true
-  2. [[Enumerable]]:表示能否通过for-in循环返回属性              默认值为 true
-  3. [[Writable]]:表示能否修改属性的值                        默认值为 true
-  4. [[Vaule]]:包含这个属性的数据值                            默认值为 undefined  `var o={}; o.o//undefined`
+  2. [[Enumerable]]:表示能否通过for-in循环返回属性                默认值为 true
+  3. [[Writable]]:表示能否修改属性的值                            默认值为 true
+  4. [[Vaule]]:包含这个属性的数据值                               默认值为 undefined
 ```js
 //修改属性默认特性 方法  Object.defineProperty(obj,key,descriportObj)
 //descriportObj 的属性名必须是 configurable|enmuberable|writeable|value
@@ -524,8 +524,64 @@ call(),apply(),bind()的作用及用法
 ```
 *   _访问器属性_ 不包含数据值，他们包含一对getter和setterh函数，其有如下四个特性
   1. [[Configurable]]:表示能否通过delete删除属性从而重新定义属性  默认值为 true
-  2. [[Enumerable]]:表示能否通过for-in循环返回属性              默认值为 true
-  3. [[Get]]:读取属性时调用的函数                              默认值为 undefined
-  4. [[Set]]:写入属性时调用的函数                              默认值为 undefined
+  2. [[Enumerable]]:表示能否通过for-in循环返回属性                默认值为 true
+  3. [[Get]]:读取属性时调用的函数                                 默认值为 undefined
+  4. [[Set]]:写入属性时调用的函数                                 默认值为 undefined
 
-### 6.1.2 定义多个属性
+### 6.1.2 定义多个属性   (略)
+### 6.1.4 读取属性的特性   (略)
+## 6.2 创建对象
+### 6.2.1 工厂模式
+工厂模式能被无数次调用，创建多个相似的对象，但不能解决对象识别问题（即怎么知道一个对象的类型）
+```js
+  function getPerson(name,age,job){
+    var o = new Object();
+    o.name = name;
+    o.age = age;
+    o.job = job;
+    o.sayName = function(){
+      console.log(`My name is ${this.name}`)
+    }
+    return o;
+  }
+```
+### 6.2.2 构造函数模式
+首字母大写，以区分其他函数。
+```js
+  function Person(name,age,job){
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.sayName = function(){
+      console.log(`My name is ${this.name}`)
+    }
+  }
+  var per1 = new Person("mars",30,"painter")
+  var per2 = new Person("Kobe",30,"player")
+  console.log(per1.constructor == per2.constructor)    // true per1,per2的构造函数都指向Person
+  console.log(per1 instanceof Object)     // true
+  console.log(per1 instanceof Person)     // true per1 是Person的一个实例
+```
+*   将构造函数当做函数
+```js
+  var per3 = new Person("Tom",19,"student")
+  per3.sayName()                         // Tom
+  Person("Window",99,"Manager")
+  window.sayName()                       // Window 不是用new操作符时，被全局调用，this => window
+```
+*   构造函数的问题
+
+### 6.2.3 原型模式
+我们每创建一个函数都有一个protopyte(原型)属性，这个属性是一个指针，指向一个对象，这个对象用途是包含可以由特定类型的所有实例共享的属性和方法
+```js
+  function Person(){
+  }
+  Person.prototype.name = "Mars";
+  Person.prototype.age = 30;
+  Person.prototype.job = "painter";
+  Person.prototype.sayName = function(){
+    console.log(`My name is ${this.name}`)
+  }
+  var per1 = new Person();
+  var per2 = new Person();
+```
