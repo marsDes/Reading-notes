@@ -585,3 +585,67 @@ call(),apply(),bind()的作用及用法
   var per1 = new Person();
   var per2 = new Person();
 ```
+*   理解原型对象 <br>
+    每创建一个函数都会，就为该函数创建prototype属性，这个属性指向函数的原型对象，该对象最初只含constructor(构造函数)属性。
+    如果为构造函数创建的实例添加原型链上同名的属性，该属性会屏蔽原型中的那个属性,而不是修改原型中那个属性。
+    obj.hasOwnProperty("keyName")可判断属性 keyName 是否存在实例中，还是原型中
+```js
+  var per3 = new Person();
+  per3.name = "Applen";
+  console.log(per3.name)   // Applen
+  console.log(per1.name)   // Mars
+  delete per3.name         // 删除实例属性
+  console.log(per3.name)   // Mars
+```
+*   原型与in操作符
+```js
+  per1.hasOwnProperty("name");   //flase
+  "name" in per1                 //true
+  Object.keys(Person.prototype)  // ["name","age", "job","sayName"]
+  var per4 = new Person();
+  per4.name = "Jim";
+  per4.age = 21;
+  Object.keys(per4)              // ["name","age"]
+```
+
+*   更简单的原型语法
+```js
+  function Person(){}
+  //重写函数原型，创建新对象
+  Person.prototype = {
+    name:"mars",
+    age:"30",
+    job:"painter",
+    sayName:function(){
+      console.log(this.name)
+    }
+  }
+  Person.prototype.constructor == Person     // false  
+  Person.prototype.constructor == Object     // true
+  // constructor 为新属性的 constructor属性 指向 Object 构造函数
+```
+
+*   原型的动态性
+```js
+  var per5 = new Person();       //创建实例
+  Person.prototype.sayHi = function(){console.log("Hi")}
+  per5.sayHi()                   // Hi
+  //创建实例后为原型添加新属性，该实例仍能访问新增的属性
+  function Foods(){}
+  var bread = new Foods();
+  Foods.prototype = {
+    name:"bread",
+    sayName:function(){
+      console.log("i taste good")
+    }
+  }
+  var cheese = new Foods()
+  bread.sayName()              //Uncaught TypeError
+  Foods.prototype.price = "$12"
+  console.log(bread.price)    // undefined
+  console.log(cheese.price)   // $12
+```
+
+
+
+
