@@ -646,6 +646,34 @@ call(),apply(),bind()的作用及用法
   console.log(cheese.price)   // $12
 ```
 
-
+## 6.3 继承
+ECMAScript支持实现继承，而且实现继承主要依靠原型链实现
+## 6.3.1 原型链
+基本思想：利用原型让一个引用类型继承另一个引用类型的属性和方法。
+构造函数、原型和实例的关系：每个构造函数都有一个原型对象（prototype）原型对象都包含一个指向构造函数的指针（constructor），
+而实例都包含一个指向原型对象的指针（[[Prototype]]）
+```js
+function SuperType(){
+  this.proterty = "superValue";
+}
+SuperType.prototype.getSuperValue = function(){
+  return this.proterty;
+}
+function SubType(){
+  this.subproterty = "subValue";
+}
+SubType.prototype = new SuperType();
+SubType.prototype.getSubValue = function(){
+  return this.subproterty
+}
+var intance = new SubType();
+console.log(intance.getSubValue())              // superValue
+console.log(intance.getSuperValue())            // subValue
+console.log(intance.constructor == SuperType)   // true
+```
+*   _别忘记默认原型_ 所有引用类型都继承了Object，所有函数默认原型的实例都是Object,因此默认原型都包含一个内部指针，指向Object.prototype
+*   _确定原型与实例的关系_ `intance instanceof Object || Object.prototype.isPrototypeOf(intance)`
+*   _谨慎定义方法_
+*   _原型链的问题_ 1、原型属性会被所有实例共享；2、不能向超类型的构造函数传递参数
 
 
