@@ -184,4 +184,70 @@ _更安全的this_
       bar.call(obj2)         // 1  箭头函数的this 无法改变 new 也不行 已绑定 obj1
 ```
 ### 2.2.6 小结
-以上...
+## 2.3 对象
+## 2.4 混合对象“类”
+### 2.4.1 类理论 
+#### 2.4.1.1 "类"设计模式
+#### 2.4.1.2 JavaScript中的类
+### 2.4.2 类的机制
+#### 2.4.2.1 建造
+一个类就是一张设计图。为了获得真正可以交互的对象，我们必须按照类来建造（实例化）一个东西，这个东西通常被称为实例，
+有需要的话你可以直接在实例上调用方法并访问其所有公共数据数据。
+#### 2.4.2.2 构造函数
+```js
+class CoolGuy {
+  specialSkill = nothing;
+  CoolGuy(skill) {
+    specialSkill = skill;
+  }
+  ShowOff(){
+    outPut("here‘s my skill", specialSkill)
+  }
+}
+Mars = new CoolGuy("Fly");
+Mars.ShowOff()  // here's my skill Fly
+```
+CoolGuy类有一个构造函数CoolGuy()，这行new CoolGuy()，实际上调用的就是它，构造函数会返回一个对象（也就是类的一个实例）
+类构造函数属于类，而且通常和类同名。
+#### 2.4.3 类的继承
+```js
+// 定义一个 交通工具 类
+class Vehicle{
+  // 初始化 发动机个数
+  engines = 1;
+  // 定义点火操作
+  ignition(){
+    output("Turning on my engine")
+  }
+  // 定义驾驶方法
+  drive(){
+    ignition();
+    output("Steering and moving forward")
+  }
+}
+// 定义继承自Vehicle的交通工具car
+class Car inherits Vehicle{
+  // car 私有属性 轮子个数
+  wheels = 4
+  // car驾驶方法
+  drive(){
+    //继承父类 drive 方法
+    inherited:drive();
+    output("Rolling on all",wheels,"wheels")
+  }
+}
+//定义继承自 Vehicle的交通工具 SpeedBoat
+class SpeedBoat inherits Vehicle{
+  // 重置 SpeedBoat 发动机个数
+  engines = 2;
+  // 重写 SpeedBoat 点火操作
+  ignition(){
+    output("Turning on my",engines,"engines.")
+  }
+  // 定义 SpeedBoat 驾驶方法
+  polit(){
+    inherited:drive(); //调用自身ignition方法
+    output("Speeding through the water with ease!")
+  }
+}
+```
