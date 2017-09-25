@@ -676,4 +676,94 @@ console.log(intance.constructor == SuperType)   // true
 *   _谨慎定义方法_
 *   _原型链的问题_ 1、原型属性会被所有实例共享；2、不能向超类型的构造函数传递参数
 
+## 7.2 闭包
+```js
+function creatClosedFun(protoName){
+  return function(obj1, obj2){
+    var value1 = obj1[protoName];
+    var value2 = obj2[protoName];
+    if(value1 > value2){
+      return value1
+    }else if(value2 > value1){
+      return value2
+    }else{
+      return 1
+    }
+  }
+}
+var test = creatClosedFun('age')
+var obj1 = {age:15},obj2 = {age:30}
+test(obj1,obj2);    // 30  能访问到 creatClosedFun 的 protoName 值 'age'
+test = null;        // 解除对匿名函数的调用， 以便释放内存 
+```
+_执行环境_
+当函数第一次被调用时，会创建一个执行环境（execution context）及相应的作用域链，并把作用域链赋值给一个特殊的内部属性
+（[[Scope]]）。然后使用 this、arguments和其他命名参数的值来初始化函数的活动对象（activationobject）但在作用域链中，
+外部函数的活动对象始终处于第二位，外部函数的外部函数的活动对象处于第三位...直至作为作用域链的终点全局执行环境。
+```js
+function compare(num1,num2){
+  if(num1 > num2){
+    return num1
+  }else{
+    return num2
+  }
+}
+var result = compare(10,5)   // 10
+```
+先定义 compare()函数，然后在全局作用域调用。当第一次调用它的时候，会创建一个包含 this，arguments，num1，num2的活动对象。
+全局执行环境的变量对象包含this，result，compare。在compare()执行环境的作用域链中函数的活动对象出于第一位，全局执行环境变量对象
+出于第二位。全局环境的变量对象始终存在，而函数的局部环境的变量对象只有在函数对象执行的过程中存在，函数执行完毕后局部活动对象会被销毁，
+compare()的作用域包含2个对象<br>  
+*   本地活动对象:当调用函数时，会为函数创建一个执行环境，然后通过复制函数的[[Scope]]属性中的对象构建执行环境的作用域链
+*   全局变量对象:在创建函数的时候会预先创建一个包含全局变量对象的作用域链，这个作用域链被保存在内部的[[Scope]]属性中
+_作用域链_本质是一个指向变量对象的指针列表，他只引用但不实际包含变量对象。<br>
+而对于闭包test调用时起执行环境中的作用域链则包含自身活动对象，creatClosedFun的活动对象及全局变量对象。
+
+### 7.2.1 闭包与变量
+闭包只能取得包含函数中任何变量的 _最后一个值_ 
+### 7.2.2 关于this对象
+### 7.2.3 内存泄露
+## 7.3 模仿块级作用域
+js没有块级作用域，解决方法
+```js
+//匿名函数
+(function(){
+  //这里是块级作用域
+  var a = "A"
+})()
+// 立即执行匿名函数 函数执行完毕之后销毁内部变量 
+console.log(a)    // a is not defined
+//函数表达式
+var someFun = function(){
+  //这里是块级作用域
+}
+someFun();
+//对比
+if(true){
+  var b = "B"
+}
+console.log(b)    // B
+```
+## 7.4 私有变量
+函数内部的变量和方法，私有变量
+_特权方法_ 有权访问私有变量和私有函数的共有方法
+```js
+//在对象上创建特权方法的方式
+//构造函数中定义特权方法
+function MyObj = {
+  var privateVal = 10;
+  function paivateFun(){
+    console.log('i am paivateFun')
+  }
+  this.privateMethod = function(){
+    privateVal++;
+    return paivateFun()
+  }
+}
+var Me = MyObj()
+Me.privateMethod()
+```
+参见对象创建方式相关知识点
+## 7.5 小结
+
 
