@@ -143,4 +143,3 @@ console.log(document.getElementById("cDiv"));   // <div id="Mars"></div>
 ```
 ### 10.1.4 Text类型
 ### 10.1.5 Comment类型
-## 10.1.5 Comment类型
