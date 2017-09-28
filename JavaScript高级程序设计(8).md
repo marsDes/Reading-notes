@@ -19,8 +19,8 @@ console.log(window.sayAge())    // 30
 
 ### 8.1.5 导航和打开窗口
 *   弹开窗口
-```js
-window.open("http://github.com","_blank","",true)    
+```js"
+wind"wopen("http://github.com","_blank","",true)    ,
 // 第四个参数 新的页面是否取代当前浏览器历史记录中但钱加载页面的布尔值
 window.close()  // 只能关闭由window.open打开的窗口
 ```
@@ -41,8 +41,8 @@ clearInterval(timeEr2)
 location对象既是window对象属性也是document对象的属性。
 ```js
 window.location == document.location //true
-{
-  "ancestorOrigins":DOMStringList {length: 0},
+{ 
+  "ancestorOrigins":DOMStringList {length: 0},,
   "assign":ƒ (),
   "hash":"#ABC12",
   "host":"www.zhihu.com",
@@ -63,3 +63,84 @@ window.location == document.location //true
 ```
 ## 8.2.1 查询字符串参数
 `document.location.search`
+## 8.2.2 位置操作
+```js
+// 以下三种方式效果相同
+location.assign("http://www.baidu.com");
+window.location = "http://www.baidu.com";
+location.href = "http://www.baidu.com";
+// 不写入浏览历史
+location.replcae("http://www.baidu.com");
+//重新加载当前页面
+location.reload(true)      // 默认false 有可能从缓存中加载数据，true 从服务器重新记载
+```
+# 8.3 navigator对象
+```js
+{
+  "appCodeName":"Mozilla",
+  "appName":"Netscape",
+  "appVersion":"5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36",
+  "cookieEnabled":true,
+  "credentials":CredentialsContainer,
+  "doNotTrack":null,
+  "geolocation":Geolocation,
+  "hardwareConcurrency":8,
+  "language":"zh-CN",
+  "languages":Array[2],
+  "maxTouchPoints":0,
+  "mediaDevices":MediaDevices,
+  "mimeTypes":MimeTypeArray,
+  "onLine":true,
+  "permissions":Permissions,
+  "platform":"Win32",
+  "plugins":PluginArray,
+  "presentation":Presentation,
+  "product":"Gecko",
+  "productSub":"20030107",
+  "serviceWorker":ServiceWorkerContainer,
+  "storage":StorageManager,
+  "userAgent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36",
+  "vendor":"Google Inc.",
+  "vendorSub":"",
+  "webkitPersistentStorage":DeprecatedStorageQuota,
+  "webkitTemporaryStorage":DeprecatedStorageQuota
+}
+```
+## 8.4 screen对象
+## 8.5 history对象
+## 8.6 小结
+# 9 客户端检测   （略）
+# 10 DOM
+## 10.1 节点层次
+### 10.1.2 Document类型
+```js
+document  //整个HTML页面
+var body = document.body  //取得页面body节点的引用
+//查找元素  主语复数s
+var domId = document.getElementById("domId");         //获取id为domId的节点
+var domtaget = document.getElementsByTagName("img");   //获取所有img标签节点
+var domClass = document.getElementsByClassName("domClass"); //
+```
+### 10.1.3 Element类型
+```js
+//访问元素标签名
+console.log(domId.tagName)   // DIV 大写
+domId.id   // 获取domId的 Id（title,className...）
+domId.id = "newDomId"   //修改domId的ID 值
+```
+*   HTML元素
+```js
+//设置属性相关方法
+domId.getAttribute("title")   // 获取属性
+domId.setAttribute("id","domId")   // 设置属性
+domId.removeAttribut("class") // 删除属性
+//创建元素
+var cDiv = document.creatElement("div");
+cDiv.id = "Mars";
+//插入元素
+document.body.appendChild(cDiv);
+console.log(document.getElementById("cDiv"));   // <div id="Mars"></div>
+```
+### 10.1.4 Text类型
+### 10.1.5 Comment类型
+## 10.1.5 Comment类型

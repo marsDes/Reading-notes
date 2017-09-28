@@ -675,6 +675,33 @@ console.log(intance.constructor == SuperType)   // true
 *   _确定原型与实例的关系_ `intance instanceof Object || Object.prototype.isPrototypeOf(intance)`
 *   _谨慎定义方法_
 *   _原型链的问题_ 1、原型属性会被所有实例共享；2、不能向超类型的构造函数传递参数
+# 7 函数表达式
+定义函数的方式，函数声明及函数表达式， 两者区别主要在于是否声明提升。
+```js
+function funName(){}   //函数声明
+var funName = function(){}  //函数表达式
+```
+## 7.1 递归
+递归函数是在一个函数通过名字调用自身的情况下构成的；
+```js
+function factorial(num){
+  if(num <= 1){
+    return 1
+  }else{
+    return factortal(num -1) * num
+  }
+}
+factorial(4)  //24
+//严格模式下的递归
+var factorial = (function f(num){
+  if(num <= 1){
+    return 1
+  }else{
+    return f(num -1 ) * num
+  }
+});
+factorial(4)  //24
+```
 
 ## 7.2 闭包
 ```js
