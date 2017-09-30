@@ -143,3 +143,33 @@ console.log(document.getElementById("cDiv"));   // <div id="Mars"></div>
 ```
 ### 10.1.4 Text类型
 ### 10.1.5 Comment类型
+
+# 11 DOM扩展
+### 11.1.1 querySelector()方法
+querySelector()方法，接收一个css选择符，返回与该模式匹配的 _第一个_ 元素，没有则返回null
+`querySelector('#divId');querySelector('body')`
+### 11.1.2 querySelectorAll()方法
+querySelectorAll()，接收一个css选择符，返回所有与该模式匹配的所有元素。
+`querySelectorAll('div');querySelectorAll('.red')`
+### 11.1.3 matchesSelector()方法
+matchesSelector(),接收一个css选择符，如果调用的元素与改选择符匹配则返回true。
+## 11.2 元素遍历
+*   childElementCount; 返回子元素个数
+*   firstElementChild; 指向第一个子元素
+*   lastElementChild; 指向最后一个子元素
+*   previousElementSibiling; 指向前一个同辈元素
+*   nextElementSibiling; 指向后一个同辈元素
+```js
+var body = document.body;
+var firstChild = body.firstElementChild;
+var classArr = body.classList;  //["classA","classB",...]
+```
+
+## 11.3 HTML
+### 11.3 与类相关的扩充
+*   getElementsByClassName() ; 接收一个css 类选择符
+*   classList属性;
+*   classList.add();// 将给定的字符串值添加到列表中，有就不添加
+*   classList.contains();//判断给点的字符串值是否存在列表中，有则返回true
+*   classList.remove();//将给定的字符串值从列表中删除
+*   classList.toggle();//如果列表中有给定字符串的值；则删除它，没有则添加上
