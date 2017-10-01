@@ -173,3 +173,46 @@ var classArr = body.classList;  //["classA","classB",...]
 *   classList.contains();//判断给点的字符串值是否存在列表中，有则返回true
 *   classList.remove();//将给定的字符串值从列表中删除
 *   classList.toggle();//如果列表中有给定字符串的值；则删除它，没有则添加上
+
+### 11.3.2 焦点管理
+document.activeElement 属性，这个属性始终会引用DOM中当前获取焦点的元素
+```js
+var btn = document.getElementById("btn");
+btn.focus();
+document.activeElement == btn    // true
+```
+### 11.3.3 HTMLdocument的变化
+1.   readyState属性的值：loading(正在加载文档)；complete(已经加载完文档)
+2.   兼容模式
+3.   head属性 document.head
+
+### 11.3.4 字符集属性
+### 11.3.6 插入标记
+1.   innerHTML; btn.innerHTML = 'MARS';优化 拼接html字符串再执行innerHTML操作
+2.   outerHTML; btn.outerHTML = 'LIN'
+
+### 11.3.7 scrollIntoViw()方法 
+如果给这个方法传 _true_或者不传任何参数，那么窗口滚动之后会调用元素的顶部与视口尽可能平齐
+如果给这个方法传 _false_那么窗口滚动之后会调用元素的底部与视口尽可能平齐
+
+### 11.4.4 插入文本
+1.   innerText; btn.innerText = 'MARS';优化 拼接html字符串再执行innerText操作
+2.   outerText; btn.outerText = 'LIN'
+3.   非html5规范属性
+
+## 11.5 小结
+
+# 12 DOM2和DOM3
+## 12.2 样式
+### 12.2.1 访问元素的样式
+任何支撑style特性的HTML元素在js中都有一个对象的style属性
+```js
+var div = document.getElementById("divID");
+// 获取元素样式
+var divW = div.style.width;   
+var divC = div.style.color;  //rgb(255,255,255)
+// 设置元素样式
+div.style.color = '#f65';
+div.style.width = '100px';
+div.style.backgroundColor = '#f73260';
+```
