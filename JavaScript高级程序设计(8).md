@@ -252,7 +252,58 @@ btn.addEventListener("click",function(){console.log("Hello")},false)
 btn.removeEventListener("click",function(){console.log("Hello")},false)
 ```
 ## 13.3 事件对象
+在触发DOM上的某个事件时，会产生一个事件对象event，这个对象包含着所有与事件有关的信息。
+### 13.3.1 DOM中的事件对象
+无论指定事件处理程序是dom1还是dom2，都会传入event对象。
+```js
+var btn = document.getElementById("btn");
+btn.onclick = function(event){
+  console.log(event.type)  // click
+}
+var btn = document.getElementById("btn");
+btn.addEventListener("click",function(e){
+  console.log(e.type)     // click
+},false)
+```
+事件成员列表(待添加)
+在事件处理程序内部，this始终指向currentTarget的值，target只包含事件的实际目标（触发处理程序的元素）
+```js
+//一个函数处理多个事件
+var btn = document.getElementById("btn");
+var handler = function(e){
+  switch(e.type){
+    case "click":
+    console.log("click me");
+    break;
+    case "mouseover":
+    console.log("over me");
+    break;
+    case "mouseout":
+    console.log("away me");
+    break;
+    default:
+    console.log("what?")
+  }
+}
+btn.onclick = handler;     // div.onclick  not div.click
+btn.onmouseover = handler;
+btn.onmouseout = handler;
+/*
+阻止特定事件的默认行为 例如  <a id="myLink" href="http://github.com"></a>
+e.preventDefault()
+阻止事件的冒泡或捕获
+e.stopPropagation()
+*/
+var body = document.body;
+    body.onclick = function(){console.log('i am body')};
 
-
+var myLink = document.getElementById("myLink");
+  myLink.onclick = function(e){
+    e.preventDefault();   //取消默认事件
+    e.stopPropagation();  //阻止事件冒泡  body的点击事件不会触发
+    console.log("do not goto github")
+  }
+```
+## 13.4 事件类型
 
 
