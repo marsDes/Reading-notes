@@ -216,3 +216,43 @@ div.style.color = '#f65';
 div.style.width = '100px';
 div.style.backgroundColor = '#f73260';
 ```
+
+### 12.2.3 遍历
+DOM树遍历，深度优先。
+# 13 事件
+JavaScript与HTML之间的交互是通过 _事件_ 实现的，事件就是文档或浏览器窗口中发生一些特定的交互瞬间。
+可以使用监听器（或处理程序）来绑定事件，以便事件发生时执行相应的代码，这种在传统软件工程称为观察者模式。
+## 13.1 事件流
+描述从页面中接收事件的顺序。
+### 13.1.1 事件冒泡
+IE的事件流叫事件冒泡，即事件开始时由最具体的元素接收，然后逐级向上传播到不具体的节点。推荐使用
+### 13.1.2 事件捕获
+网景的事件流叫事件捕获，跟ie事件流相反。不建议使用
+### 13.1.3 DOM事件流
+DOM2事件流包括三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段。
+## 13.2 事件处理程序
+诸如click、mouseover、load...等都是事件的名字，而响应某个事件的函数叫做事件处理程序（事件侦听器）<br>
+事件处理程序名字以"on"开头，因此click事件的处理程序就是onclick。
+### 13.2.1 HTML事件处理程序
+```html
+<input type="button" value="show me" onclick="console.log(this.value)">
+```
+### DOM2级事件处理程序
+DOM2级定义了2个操作方法，addEventListener(),removeEventListener();<br>
+他们都接收2个参数：要处理事件名字，作为事件处理程序的函数和一个布尔值（true 在捕获阶段调用，false在冒泡阶段调用）
+```js
+//dom1
+var btn = document.getElementById("btn");
+btn.onclick = function(){console.log("Hello")}
+//删除事件处理程序
+btn.onclick = null;
+//dom2
+var btn = document.getElementById("btn");
+btn.addEventListener("click",function(){console.log("Hello")},false)
+btn.removeEventListener("click",function(){console.log("Hello")},false)
+```
+## 13.3 事件对象
+
+
+
+
